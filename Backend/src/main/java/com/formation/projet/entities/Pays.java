@@ -1,10 +1,12 @@
 package com.formation.projet.entities;
 
-import javax.persistence.Entity;
+
+
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
+
 
 @Entity
 public class Pays implements Serializable {
@@ -12,7 +14,7 @@ public class Pays implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)  
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="Pays_id")
 	private long id;
 	private String libelle;

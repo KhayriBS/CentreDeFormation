@@ -25,7 +25,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.formation.projet.response.MessageResponse;
 
-import lombok.var;
 import com.formation.projet.service.ParticipantServiceImpl;
 
 
