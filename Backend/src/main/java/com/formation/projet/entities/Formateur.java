@@ -5,8 +5,6 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 
 @Entity
 public class Formateur implements Serializable {
@@ -44,12 +42,16 @@ private static final long serialVersionUID = 1L;
 	}
 
 
-	public Formateur() {
+	public Formateur(long l, String dupont) {
 		super();
 	}
 
+    public Formateur() {
 
-	public long getId() {
+    }
+
+
+    public long getId() {
 		return id;
 	}
 
