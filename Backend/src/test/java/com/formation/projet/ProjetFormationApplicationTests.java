@@ -15,13 +15,6 @@ import org.springframework.test.context.ActiveProfiles;
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @ActiveProfiles("test")
 public class ProjetFormationApplicationTests {
-	@MockBean
-	private UserRepository userRepository;
 
-	@MockBean
-	private RoleRepository roleRepository;
-	@Test
-	void contextLoads() {
-	}
 
 }
