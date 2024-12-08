@@ -21,10 +21,6 @@ import org.springframework.web.cors.CorsConfiguration;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
-
-    @Autowired
-    private UserDetailsServiceImpl userDetailsService;
-
     @Autowired
     private JwtAuthenticationEntryPoint authenticationEntryPoint;
 
@@ -46,18 +42,26 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .csrf(csrf -> csrf.disable()) // Disable CSRF
-                .cors(cors -> cors.configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())) // Configure CORS
+                .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.configurationSource(request -> {
+                    CorsConfiguration config = new CorsConfiguration();
+                    config.addAllowedOrigin("*");
+                    config.addAllowedMethod("*");
+                    config.addAllowedHeader("*");
+                    return config;
+                }))
                 .exceptionHandling(exceptionHandling ->
-                        exceptionHandling.authenticationEntryPoint(authenticationEntryPoint)) // Handle authentication exceptions
+                        exceptionHandling.authenticationEntryPoint(authenticationEntryPoint))
                 .sessionManagement(sessionManagement ->
-                        sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Stateless sessions
-                .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/auth/**").permitAll() // Allow public access to /auth/**
-                                .requestMatchers(HttpMethod.GET, "/user/allusers").permitAll() // Allow GET requests to /user/allusers
-                                .anyRequest().authenticated()); // All other requests must be authenticated
+                        sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth -> auth
+                        // Exclure explicitement /h2-console/** de la sécurité
+                        .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/auth/**").permitAll()
+                        .anyRequest().authenticated())
+                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()));
 
-        // Add the JWT token filter
+        // Ajoute le filtre JWT avant UsernamePasswordAuthenticationFilter
         httpSecurity.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();
