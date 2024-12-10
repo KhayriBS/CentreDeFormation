@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  backend:
+    image: spring-boot-one-to-many:1.1-SNAPSHOT
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    ports:
+      - "9090:9090"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3308/formation
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD:
+      JAVA_OPTS: -Xmx512m
+    depends_on:
+      - mysql
+
+  frontend:
+    image: angular-frontend:latest
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: formation
+    ports:
+      - "3308:3308"
