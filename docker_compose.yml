@@ -4,7 +4,7 @@ services:
   backend:
     image: spring-boot-one-to-many:1.1-SNAPSHOT
     build:
-      context: ../backend
+      context: ./Backend
       dockerfile: Dockerfile
     ports:
       - "9090:9090"
@@ -19,7 +19,7 @@ services:
   frontend:
     image: angular-frontend:latest
     build:
-      context: ../frontend
+      context: ./Frontend
       dockerfile: Dockerfile
     ports:
       - "4200:80"
