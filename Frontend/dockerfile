@@ -23,7 +23,6 @@ RUN rm -rf ./*
 
 # Copier les fichiers Angular générés depuis l'étape précédente
 COPY --from=build /app/dist/clientFormation .
-COPY src/nginx_front.conf /etc/nginx/nginx_front.conf
 
 # Exposer le port 80
 EXPOSE 80
