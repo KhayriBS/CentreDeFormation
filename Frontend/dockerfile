@@ -1,9 +1,31 @@
+# Étape 1 : Construction de l'application Angular
 FROM node:14 AS build
 WORKDIR /app
-COPY . .
+
+# Copier uniquement les fichiers nécessaires pour installer les dépendances
+COPY package.json package-lock.json ./
+
+# Installer les dépendances
 RUN npm install
+
+# Copier tout le code source dans l'image
+COPY . .
+
+# Construire l'application Angular
 RUN npm run build --prod
 
+# Étape 2 : Serveur NGINX pour héberger l'application
 FROM nginx:alpine
-COPY --from=build /app/dist/your-angular-app /usr/share/nginx/html
-EXPOSE 80
+WORKDIR /usr/share/nginx/html
+
+# Supprimer les fichiers par défaut NGINX
+RUN rm -rf ./*
+
+# Copier les fichiers Angular générés depuis l'étape précédente
+COPY --from=build /app/dist/clientFormation .
+
+# Exposer le port 4205
+EXPOSE 4205
+
+# Commande par défaut pour démarrer NGINX
+CMD ["nginx", "-g", "daemon off;"]
