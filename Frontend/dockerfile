@@ -27,5 +27,5 @@ COPY --from=build /app/dist/clientFormation .
 # Exposer le port 80
 EXPOSE 80
 
-# Commande par défaut pour démarrer NGINX
+# Commande par défaut pour démarrer 
 CMD ["nginx", "-g", "daemon off;"]
