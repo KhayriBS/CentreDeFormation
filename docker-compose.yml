@@ -43,4 +43,4 @@ services:
       # Map built Angular files
       - ./Frontend/dist/clientFormation:/usr/share/nginx/html:ro
     ports:
-      - "8080:80"
+      - "8070:80"
