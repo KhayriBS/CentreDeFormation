@@ -29,6 +29,6 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: formation
+      MYSQL_DATABASE: mydatabase
     ports:
       - "3308:3306"
