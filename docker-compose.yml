@@ -22,7 +22,7 @@ services:
       context: ./Frontend
       dockerfile: Dockerfile
     ports:
-      - "4202:4205"
+      - "4202:80"
 
   mysql:
     image: mysql:latest

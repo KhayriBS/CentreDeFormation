@@ -24,8 +24,8 @@ RUN rm -rf ./*
 # Copier les fichiers Angular générés depuis l'étape précédente
 COPY --from=build /app/dist/clientFormation .
 
-# Exposer le port 4205
-EXPOSE 4205
+# Exposer le port 80
+EXPOSE 80
 
 # Commande par défaut pour démarrer NGINX
 CMD ["nginx", "-g", "daemon off;"]
