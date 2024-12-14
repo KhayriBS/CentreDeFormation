@@ -1,7 +1,6 @@
 import { SessionService } from '../services/session.service';
 import { Component, OnInit } from '@angular/core';
 import { DomaineService } from '../services/domaine.service';
-import { Domaine } from '../domaine/domaine';
 import { FormationService } from '../services/formation.service';
 import { Formation } from '../formation/formation';
 import { Session } from '../session/session';

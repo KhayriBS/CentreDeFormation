@@ -1,4 +1,4 @@
-import { Domaine } from "../domaine/domaine";
+import { Domaine } from "../domaine/Domaine";
 
 export interface Formation {
     id : number;

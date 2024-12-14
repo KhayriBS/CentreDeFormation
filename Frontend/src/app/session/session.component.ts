@@ -6,8 +6,8 @@ import { OrganismeService } from '../services/organisme.service';
 import { Session } from './session';
 import { SessionService } from '../services/session.service';
 import { Organisme } from '../organisme/organisme';
-import { Formateur } from '../Formateur/formateur';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Formateur } from '../formateur/formateur';
 
 @Component({
   selector: 'app-session',

@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DomaineService } from '../services/domaine.service';
-import { Domaine } from './domaine';
 import { NgForm } from '@angular/forms';
+import { Domaine } from './Domaine';
 
 @Component({
   selector: 'app-domaine',

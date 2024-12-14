@@ -1,4 +1,5 @@
 import { Organisme } from "../organisme/organisme";
+
 export interface Formateur {
     id : number;
     nom : string;

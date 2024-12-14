@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { DomaineService } from '../services/domaine.service';
-import { Domaine } from '../domaine/domaine';
 import { FormationService } from '../services/formation.service';
-import { Formation } from './formation';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Domaine } from '../domaine/Domaine';
+import { Formation } from './formation';
 @Component({
   selector: 'app-formation',
   templateUrl: './formation.component.html',

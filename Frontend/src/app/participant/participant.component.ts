@@ -5,10 +5,10 @@ import { Participant } from './participant';
 import { OrganismeService } from '../services/organisme.service';
 import { Organisme } from '../organisme/organisme';
 import { ProfilService } from '../services/profil.service';
-import { Profil } from '../profil/profil';
 import { PaysService } from '../services/pays.service';
 import { Pays } from '../pays/pays';
 import { NgForm } from '@angular/forms';
+import { Profil } from '../profil/profiil';
 @Component({
   selector: 'app-participant',
   templateUrl: './participant.component.html',

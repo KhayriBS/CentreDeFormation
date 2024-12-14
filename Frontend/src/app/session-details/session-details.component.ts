@@ -5,8 +5,6 @@ import { FormateurService } from '../services/formateur.service';
 import { OrganismeService } from '../services/organisme.service';
 import { Session } from '../session/session';
 import { SessionService } from '../services/session.service';
-import { Organisme } from '../organisme/Organisme';
-import { Formateur } from '../Formateur/Formateur';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ParticipantService } from '../services/participant.service';
 import { Participant } from '../participant/participant';

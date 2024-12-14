@@ -1,6 +1,6 @@
 
-    import { Formation } from "../Formation/Formation";
-    import { Session } from "../Session/Session";
+    import { Formation } from "../formation/formation";
+import { Session } from "../session/session";
 export interface formationSession {
     formation : Formation;
     session :   Session

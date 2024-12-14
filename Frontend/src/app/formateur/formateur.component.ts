@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { OrganismeService } from '../services/organisme.service';
-import { Organisme } from '../organisme/organisme';
 import { FormateurService } from '../services/formateur.service';
-import { Formateur } from '../formateur/formateur';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
+import { Organisme } from '../organisme/organisme';
+import { Formateur } from './formateur';
 @Component({
   selector: 'app-formateur',
   templateUrl: './formateur.component.html',

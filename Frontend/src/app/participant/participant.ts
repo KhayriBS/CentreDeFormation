@@ -1,6 +1,6 @@
 import { Organisme } from "../organisme/organisme";
 import { Pays } from "../pays/pays";
-import { Profil } from "../profil/profil";
+import { Profil } from "../profil/profiil";
 export interface Participant {
     id : number;
     nom : string;
