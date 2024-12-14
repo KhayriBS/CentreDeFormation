@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DomaineService } from '../services/domaine.service';
 import { NgForm } from '@angular/forms';
-import { Domaine } from './Domaine';
+import { Domaine } from './Idomaine';
 
 @Component({
   selector: 'app-domaine',

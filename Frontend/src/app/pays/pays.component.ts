@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PaysService } from '../services/pays.service';
-import { Pays } from './pays';
+import { Pays } from './Ipays';
 
 @Component({
   selector: 'app-pays',

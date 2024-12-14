@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Formateur } from '../formateur/formateur';
+import { Formateur } from '../formateur/Iformateur';
 import { environment } from 'src/environments/environment';
 
 @Injectable({providedIn: 'root'})

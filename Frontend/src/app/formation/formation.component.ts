@@ -4,8 +4,8 @@ import { FormationService } from '../services/formation.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Domaine } from '../domaine/Domaine';
-import { Formation } from './formation';
+import { Domaine } from '../domaine/Idomaine';
+import { Formation } from './Iformation';
 @Component({
   selector: 'app-formation',
   templateUrl: './formation.component.html',

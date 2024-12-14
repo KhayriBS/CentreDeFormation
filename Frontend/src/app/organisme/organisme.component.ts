@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { OrganismeService } from '../services/organisme.service';
 import { NgForm } from '@angular/forms';
-import { Organisme } from './organisme';
+import { Organisme } from './Iorganisme';
 
 @Component({
   selector: 'app-organisme',

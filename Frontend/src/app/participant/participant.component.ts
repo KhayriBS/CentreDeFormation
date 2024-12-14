@@ -1,14 +1,14 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ParticipantService } from '../services/participant.service';
-import { Participant } from './participant';
+import { Participant } from './Iparticipant';
 import { OrganismeService } from '../services/organisme.service';
-import { Organisme } from '../organisme/organisme';
+import { Organisme } from '../organisme/Iorganisme';
 import { ProfilService } from '../services/profil.service';
 import { PaysService } from '../services/pays.service';
-import { Pays } from '../pays/pays';
+import { Pays } from '../pays/Ipays';
 import { NgForm } from '@angular/forms';
-import { Profil } from '../profil/profiil';
+import { Profil } from '../profil/Iprofil';
 @Component({
   selector: 'app-participant',
   templateUrl: './participant.component.html',

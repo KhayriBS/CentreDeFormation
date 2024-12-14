@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Domaine } from '../domaine/Domaine';
-import { Session } from '../session/session';
-import { Participant } from '../participant/participant';
+import { Domaine } from '../domaine/Idomaine';
+import { Session } from '../session/Isession';
+import { Participant } from '../participant/Iparticipant';
 import { environment } from 'src/environments/environment';
 
 

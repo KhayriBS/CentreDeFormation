@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FormateurService } from '../services/formateur.service';
 import { OrganismeService } from '../services/organisme.service';
-import { Session } from './session';
+import { Session } from './Isession';
 import { SessionService } from '../services/session.service';
-import { Organisme } from '../organisme/organisme';
+import { Organisme } from '../organisme/Iorganisme';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Formateur } from '../formateur/formateur';
+import { Formateur } from '../formateur/Iformateur';
 
 @Component({
   selector: 'app-session',

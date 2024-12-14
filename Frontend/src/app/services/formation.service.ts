@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Formation } from '../formation/formation';
+import { Formation } from '../formation/Iformation';
 import { environment } from 'src/environments/environment';
-import { Session } from '../session/session';
+import { Session } from '../session/Isession';
 @Injectable({providedIn: 'root'})
 export class FormationService {
     apiBaseUrl: 'http://localhost:8080'

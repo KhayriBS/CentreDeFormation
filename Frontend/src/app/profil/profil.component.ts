@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ProfilService } from '../services/profil.service';
-import { Profil } from './profiil';
+import { Profil } from './Iprofil';
 @Component({
   selector: 'app-profil',
   templateUrl: './profil.component.html',
