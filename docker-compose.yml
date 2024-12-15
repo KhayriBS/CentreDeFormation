@@ -32,4 +32,15 @@ services:
       MYSQL_DATABASE: FORMATION
     ports:
       - "3308:3306"
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: always
+    ports:
+      - "8085:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root
+    depends_on:
+      - mysql
 
