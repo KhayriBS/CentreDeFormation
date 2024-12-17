@@ -12,7 +12,7 @@ RUN npm install
 COPY . .
 
 # Construire l'application Angular
-RUN npm run build --docker
+RUN npm run build -- --configuration=docker
 
 # Étape 2 : Serveur NGINX pour héberger l'application
 FROM nginx:alpine
