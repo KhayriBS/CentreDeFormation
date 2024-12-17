@@ -24,6 +24,9 @@ RUN rm -rf ./*
 # Copier les fichiers Angular générés depuis l'étape précédente
 COPY --from=build /app/dist/clientFormation .
 
+# Copier le fichier de configuration NGINX personnalisé
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Exposer le port 80
 EXPOSE 80
 
