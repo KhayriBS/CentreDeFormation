@@ -31,7 +31,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: FORMATION
     ports:
-      - "3308:3306"
+      - "3310:3306"
   phpmyadmin:
     image: phpmyadmin:latest
     restart: always
