@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>com.bezkoder</groupId>
 	<artifactId>spring-boot-one-to-many</artifactId>
-	<version>1.0.0-RELEASE</version>
+	<version>1.0.0</version>
 	<name>spring-boot-one-to-many</name>
 	<description>Spring Boot One to Many example using Hibernate / JPA @ManyToOne</description>
 
@@ -17,10 +17,10 @@
 		<java.version>17</java.version>
 	</properties>
 	<distributionManagement>
-		<snapshotRepository>
+		<repository>
 			<id>nexus-releases</id>
 			<url>http://192.168.50.4:8081/repository/maven-releases/</url>
-		</snapshotRepository>
+		</repository>
 	</distributionManagement>
 
 	<dependencies>
