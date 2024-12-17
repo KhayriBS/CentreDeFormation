@@ -11,7 +11,7 @@
 
 	<groupId>com.bezkoder</groupId>
 	<artifactId>spring-boot-one-to-many</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.0-RELEASE</version>
 	<name>spring-boot-one-to-many</name>
 	<description>Spring Boot One to Many example using Hibernate / JPA @ManyToOne</description>
 
