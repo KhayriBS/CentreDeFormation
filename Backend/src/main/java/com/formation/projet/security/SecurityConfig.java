@@ -45,7 +45,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
-                    config.addAllowedOrigin("*");
+                    config.addAllowedOrigin("http://192.168.50.4:4202");
                     config.addAllowedMethod("*");
                     config.addAllowedHeader("*");
                     return config;
