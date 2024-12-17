@@ -4,6 +4,7 @@ import { User } from '../auth/user.model';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 
 const USER_KEY = 'auth-user';
@@ -12,17 +13,16 @@ const headers = new HttpHeaders().set('Content-Type', 'application/json');
     providedIn: 'root'
 })
 export class AuthService{
-    private baseUrl = 'http://localhost:9090/auth/';
 
     constructor(private http: HttpClient,  private router: Router){}
     signup(user: User): Observable<any>{
 
-        return this.http.post(this.baseUrl + 'signup', user, { headers, responseType: 'text'})
+        return this.http.post(environment.baseUrlAuth + 'signup', user, { headers, responseType: 'text'})
                         .pipe(catchError(this.handleError));;
     }
     login(user: string, password: string){
 
-        return this.http.post<any>(this.baseUrl + 'login',
+        return this.http.post<any>(environment.baseUrlAuth + 'login',
             {userName: user, password:password}, {headers})
             .pipe(catchError(this.handleError),
                 map(userData => {

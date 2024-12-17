@@ -6,24 +6,22 @@ import { environment } from 'src/environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class OrganismeService {
-    apiBaseUrl: 'http://localhost:8080'
-  private apiServerUrl ='http://localhost:9090/organisme'
 
   constructor(private http: HttpClient){}
 
   public getOrganismes(): Observable<Organisme[]> {
-    return this.http.get<Organisme[]>(`${this.apiServerUrl}`);
+    return this.http.get<Organisme[]>(`${environment.apiServerUrlOrganisme}`);
   }
 
   public addOrganisme(organisme: Organisme): Observable<Organisme> {
-    return this.http.post<Organisme>(`${this.apiServerUrl}`, organisme);
+    return this.http.post<Organisme>(`${environment.apiServerUrlOrganisme}`, organisme);
   }
 
   public updateOrganisme(organisme: Organisme): Observable<Organisme> {
-    return this.http.put<Organisme>(`${this.apiServerUrl}`, organisme);
+    return this.http.put<Organisme>(`${environment.apiServerUrlOrganisme}`, organisme);
   }
   
   public deleteOrganisme(organismeId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/${organismeId}`);
+    return this.http.delete<void>(`${environment.apiServerUrlOrganisme}/${organismeId}`);
   }
 }

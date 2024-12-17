@@ -9,33 +9,30 @@ import { environment } from 'src/environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class SessionService {
-    apiBaseUrl: 'http://localhost:8080'
-  private apiServerUrl ='http://localhost:9090/session'
-  private apiServerUrl1 ='http://localhost:9090/participant'
 
   constructor(private http: HttpClient){}
 
   public getSessions(): Observable<Session[]> {
-    return this.http.get<Session[]>(`${this.apiServerUrl}`);
+    return this.http.get<Session[]>(`${environment.apiSessionUrl}`);
   }
 
   public addSession(session: Session): Observable<Session> {
-    return this.http.post<Session>(`${this.apiServerUrl}`, session);
+    return this.http.post<Session>(`${environment.apiSessionUrl}`, session);
   }
 
   public getSessionById(sessionId: number): Observable<Session[]> {
-    return this.http.get<Session[]>(`${this.apiServerUrl}/${sessionId}`);
+    return this.http.get<Session[]>(`${environment.apiSessionUrl}/${sessionId}`);
   }
 
   public deleteSession(sessionId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/${sessionId}`);
+    return this.http.delete<void>(`${environment.apiSessionUrl}/${sessionId}`);
   }
   public updateSession(session: Session): Observable<Session> {
-    return this.http.put<Session>(`${this.apiServerUrl}`, session);
+    return this.http.put<Session>(`${environment.apiSessionUrl}`, session);
   }
 
   public addParticipantToSession(sessionId: number, participant : Participant): Observable<Participant> {
-    return this.http.post<Participant>(`${this.apiServerUrl1}/${sessionId}`, participant   );
+    return this.http.post<Participant>(`${environment.apiParticipantUrl}/${sessionId}`, participant   );
   }
  
 }

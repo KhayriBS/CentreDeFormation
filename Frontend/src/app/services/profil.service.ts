@@ -6,25 +6,23 @@ import { environment } from 'src/environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class ProfilService {
-    apiBaseUrl: 'http://localhost:8080'
-  private apiServerUrl ='http://localhost:9090/profil'
 
   constructor(private http: HttpClient){}
 
   public getProfils(): Observable<Profil[]> {
-    return this.http.get<Profil[]>(`${this.apiServerUrl}`);
+    return this.http.get<Profil[]>(`${environment.apiServerUrlProfil}`);
   }
 
   public addProfil(profil: Profil): Observable<Profil> {
-    return this.http.post<Profil>(`${this.apiServerUrl}`, profil);
+    return this.http.post<Profil>(`${environment.apiServerUrlProfil}`, profil);
   }
 
   public updateProfil(profil: Profil): Observable<Profil> {
-    return this.http.put<Profil>(`${this.apiServerUrl}`, profil);
+    return this.http.put<Profil>(`${environment.apiServerUrlProfil}`, profil);
   }
 
   public deleteProfil(profilId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/${profilId}`);
+    return this.http.delete<void>(`${environment.apiServerUrlProfil}/${profilId}`);
   }
 
 

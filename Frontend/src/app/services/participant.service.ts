@@ -6,27 +6,25 @@ import { environment } from 'src/environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class ParticipantService {
-    apiBaseUrl: 'http://localhost:8080'
-  private apiServerUrl ='http://localhost:9090/participant'
 
   constructor(private http: HttpClient){}
 
   public getParticipants(): Observable<Participant[]> {
-    return this.http.get<Participant[]>(`${this.apiServerUrl}`);
+    return this.http.get<Participant[]>(`${environment.apiServerUrlParticipant}`);
   }
 
   public addParticipant(participant: Participant): Observable<Participant> {
-    return this.http.post<Participant>(`${this.apiServerUrl}`, participant);
+    return this.http.post<Participant>(`${environment.apiServerUrlParticipant}`, participant);
   } 
 
 
 
   public updateParticipant(participant: Participant): Observable<Participant> {
-    return this.http.put<Participant>(`${this.apiServerUrl}`, participant);
+    return this.http.put<Participant>(`${environment.apiServerUrlParticipant}`, participant);
   }
 
   public deleteParticipant(participantId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/${participantId}`);
+    return this.http.delete<void>(`${environment.apiServerUrlParticipant}/${participantId}`);
   }
 
 }

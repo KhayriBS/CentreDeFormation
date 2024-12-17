@@ -6,25 +6,24 @@ import { environment } from 'src/environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class DomaineService {
-    apiBaseUrl: 'http://localhost:8080'
-  private apiServerUrl ='http://localhost:9090/domaine'
+ 
 
   constructor(private http: HttpClient){}
 
   public getDomaine(): Observable<Domaine[]> {
-    return this.http.get<Domaine[]>(`${this.apiServerUrl}`);
+    return this.http.get<Domaine[]>(`${environment.apiServerUrlDomaine}`);
   }
 
   public addDomaine(domaine: Domaine): Observable<Domaine> {
-    return this.http.post<Domaine>(`${this.apiServerUrl}`, domaine);
+    return this.http.post<Domaine>(`${environment.apiServerUrlDomaine}`, domaine);
   }
 
   public deleteDomaine(domaineId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/${domaineId}`);
+    return this.http.delete<void>(`${environment.apiServerUrlDomaine}/${domaineId}`);
   }
 
   public updateDomaine(domaine: Domaine): Observable<Domaine> {
-    return this.http.put<Domaine>(`${this.apiServerUrl}`, domaine);
+    return this.http.put<Domaine>(`${environment.apiServerUrlDomaine}`, domaine);
   }
 
 

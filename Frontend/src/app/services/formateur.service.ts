@@ -6,23 +6,21 @@ import { environment } from 'src/environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class FormateurService {
-    apiBaseUrl: 'http://localhost:8080'
-  private apiServerUrl ='http://localhost:9090/formateur'
 
   constructor(private http: HttpClient){}
 
   public getFormateurs(): Observable<Formateur[]> {
-    return this.http.get<Formateur[]>(`${this.apiServerUrl}`);
+    return this.http.get<Formateur[]>(`${environment.apiServerUrlFormateur}`);
   }
 
   public addFormateur(formateur: Formateur): Observable<Formateur> {
-    return this.http.post<Formateur>(`${this.apiServerUrl}`, formateur);
+    return this.http.post<Formateur>(`${environment.apiServerUrlFormateur}`, formateur);
   }
 
   public updateFormateur(formateur: Formateur): Observable<Formateur> {
-    return this.http.put<Formateur>(`${this.apiServerUrl}`, formateur);
+    return this.http.put<Formateur>(`${environment.apiServerUrlFormateur}`, formateur);
   }
   public deleteFormateur(formateurId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/${formateurId}`);
+    return this.http.delete<void>(`${environment.apiServerUrlFormateur}/${formateurId}`);
   } 
 }
