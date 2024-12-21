@@ -46,8 +46,12 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
                     config.addAllowedOrigin("http://192.168.50.4:4202");
-                    config.addAllowedMethod("*");
+                    config.addAllowedMethod("GET");
+                    config.addAllowedMethod("POST");
+                    config.addAllowedMethod("PUT");
+                    config.addAllowedMethod("DELETE");
                     config.addAllowedHeader("*");
+                    config.setAllowCredentials(true);
                     return config;
                 }))
                 .exceptionHandling(exceptionHandling ->
