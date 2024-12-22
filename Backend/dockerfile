@@ -11,4 +11,4 @@ COPY ${JAR_FILE} /app.jar
 EXPOSE 9090
 
 # Étape 5 : Commande pour exécuter l'application
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+ENTRYPOINT ["sh", "-c", "until nc -z mysql 3306; do echo Waiting for MySQL...; sleep 5; done; java -jar /app.jar"]
