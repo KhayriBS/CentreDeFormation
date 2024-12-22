@@ -46,13 +46,13 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
                     config.addAllowedOrigin("http://192.168.50.4:4202");
-                    config.addAllowedMethod("GET");
-                    config.addAllowedMethod("POST");
-                    config.addAllowedMethod("PUT");
-                    config.addAllowedMethod("DELETE");
+                    config.addAllowedMethod("*");
                     config.addAllowedHeader("*");
                     config.setAllowCredentials(true);
-                    return config;
+
+                    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+                    source.registerCorsConfiguration("/**", config);
+                    return source;
                 }))
                 .exceptionHandling(exceptionHandling ->
                         exceptionHandling.authenticationEntryPoint(authenticationEntryPoint))
