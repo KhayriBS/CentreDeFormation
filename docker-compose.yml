@@ -34,7 +34,7 @@ services:
       - app-network
 
   mysql:
-    image: mysql:latest
+    image: mysql:8.0
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
