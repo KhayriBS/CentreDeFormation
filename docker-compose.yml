@@ -1,4 +1,8 @@
 
+networks:
+  app-network:
+    driver: bridge
+
 services:
   backend:
     image: spring-boot-one-to-many:1.1-SNAPSHOT
@@ -14,6 +18,8 @@ services:
       JAVA_OPTS: -Xmx512m
     depends_on:
       - mysql
+    networks:
+      - app-network
 
   frontend:
     image: angular-frontend:latest
@@ -24,6 +30,8 @@ services:
       - "4202:80"
     environment:
       API_URL: http://192.168.50.4:9090
+    networks:
+      - app-network
 
   mysql:
     image: mysql:latest
@@ -33,6 +41,9 @@ services:
       MYSQL_DATABASE: FORMATION
     ports:
       - "3310:3306"
+    networks:
+      - app-network
+
   phpmyadmin:
     image: phpmyadmin:latest
     restart: always
@@ -44,4 +55,5 @@ services:
       PMA_PASSWORD: root
     depends_on:
       - mysql
-
+    networks:
+      - app-network
