@@ -4,35 +4,6 @@ networks:
     driver: bridge
 
 services:
-  backend:
-    image: spring-boot-one-to-many:1.1-SNAPSHOT
-    build:
-      context: ./Backend
-      dockerfile: Dockerfile
-    ports:
-      - "9095:9095"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/FORMATION?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
-      JAVA_OPTS: -Xmx512m
-    depends_on:
-      - mysql
-    networks:
-      - app-network
-
-  frontend:
-    image: angular-frontend:latest
-    build:
-      context: ./Frontend
-      dockerfile: Dockerfile
-    ports:
-      - "4202:80"
-    environment:
-      API_URL: http://192.168.50.4:9095
-    networks:
-      - app-network
-
   mysql:
     image: mysql:8.0
     restart: always
@@ -57,3 +28,35 @@ services:
       - mysql
     networks:
       - app-network
+  backend:
+    image: spring-boot-one-to-many:1.1-SNAPSHOT
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    ports:
+      - "9095:9095"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/FORMATION?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      JAVA_OPTS: -Xmx512m
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+  frontend:
+    image: angular-frontend:latest
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4202:80"
+    depends_on:
+      - backend
+    environment:
+      API_URL: http://192.168.50.4:9095
+    networks:
+      - app-network
+
+
