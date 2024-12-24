@@ -4,17 +4,17 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:9090',
-  apiSessionUrl: 'http://localhost:9090/session',
-  apiParticipantUrl: 'http://localhost:9090/participant',
-  baseUrlAuth : 'http://backend:9090/auth/',
-  apiServerUrlDomaine: 'http://localhost:9090/domaine',
-  apiServerUrlFormateur: 'http://localhost:9090/formateur',
-  apiServerUrlFormation: 'http://localhost:9090/formation',
-  apiServerUrlOrganisme: 'http://localhost:9090/organisme',
-  apiServerUrlParticipant: 'http://localhost:9090/participant',
-  apiServerUrlPays: 'http://localhost:9090/pays',
-  apiServerUrlProfil: 'http://localhost:9090/profil',
+  apiUrl: 'http://localhost:9095',
+  apiSessionUrl: 'http://localhost:9095/session',
+  apiParticipantUrl: 'http://localhost:9095/participant',
+  baseUrlAuth : 'http://backend:9095/auth/',
+  apiServerUrlDomaine: 'http://localhost:9095/domaine',
+  apiServerUrlFormateur: 'http://localhost:9095/formateur',
+  apiServerUrlFormation: 'http://localhost:9095/formation',
+  apiServerUrlOrganisme: 'http://localhost:9095/organisme',
+  apiServerUrlParticipant: 'http://localhost:9095/participant',
+  apiServerUrlPays: 'http://localhost:9095/pays',
+  apiServerUrlProfil: 'http://localhost:9095/profil',
 
 
 

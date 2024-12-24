@@ -8,7 +8,7 @@ ARG JAR_FILE=target/spring-boot-one-to-many-1.1.0-SNAPSHOT.jar
 COPY ${JAR_FILE} /app.jar
 
 # Étape 4 : Exposer le port de l'application
-EXPOSE 9090
+EXPOSE 9095
 
 # Étape 5 : Commande pour exécuter l'application
 ENTRYPOINT ["sh", "-c", "until nc -z mysql 3306; do echo Waiting for MySQL...; sleep 5; done; java -jar /app.jar"]
