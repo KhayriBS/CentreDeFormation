@@ -36,7 +36,7 @@ services:
     ports:
       - "9095:9095"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/FORMATION?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/FORMATION?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&connectTimeout=5000&socketTimeout=5000
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
       JAVA_OPTS: -Xmx512m
