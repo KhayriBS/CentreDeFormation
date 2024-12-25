@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins = "http://192.168.50.4:4202") // Autoriser uniquement l'origine spécifiée
+@CrossOrigin(origins = "http://192.168.50.4:4202/login") // Autoriser uniquement l'origine spécifiée
 @RestController
 
 @RequestMapping("/auth")
