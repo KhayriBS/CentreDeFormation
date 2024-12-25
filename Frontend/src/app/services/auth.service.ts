@@ -6,64 +6,59 @@ import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
-
 const USER_KEY = 'auth-user';
 const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
-export class AuthService{
+export class AuthService {
+  constructor(private http: HttpClient, private router: Router) {}
 
-    constructor(private http: HttpClient,  private router: Router){}
-    signup(user: User): Observable<any>{
+  signup(user: User): Observable<any> {
+    return this.http
+      .post(environment.baseUrlAuth + 'signup', user, { headers, responseType: 'text' })
+      .pipe(catchError(this.handleError));
+  }
 
-        return this.http.post(environment.baseUrlAuth + 'signup', user, { headers, responseType: 'text'})
-                        .pipe(catchError(this.handleError));;
+  login(user: string, password: string): Observable<any> {
+    return this.http
+      .post<any>(environment.baseUrlAuth + 'login', { userName: user, password: password }, { headers })
+      .pipe(
+        catchError(this.handleError),
+        map((userData) => {
+          sessionStorage.setItem('username', user);
+          let tokenStr = 'Bearer ' + userData.token;
+          console.log('Token---  ' + tokenStr);
+          sessionStorage.setItem('token', tokenStr);
+          sessionStorage.setItem('roles', JSON.stringify(userData.roles));
+          return userData;
+        })
+      );
+  }
+
+  logout() {
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+  }
+
+  isLoggedIn(): boolean {
+    return sessionStorage.getItem('username') !== null;
+  }
+
+  private handleError(httpError: HttpErrorResponse) {
+    let message: string = '';
+    if (httpError.error instanceof ProgressEvent) {
+      console.log('in progress event');
+      message = 'Network error';
+    } else {
+      message = httpError.error.message;
+      console.error(`Backend returned code ${httpError.status}, body was: ${httpError.error}`);
     }
-    login(user: string, password: string){
+    return throwError(message);
+  }
 
-        return this.http.post<any>(environment.baseUrlAuth + 'login',
-            {userName: user, password:password}, {headers})
-            .pipe(catchError(this.handleError),
-                map(userData => {
-                  sessionStorage.setItem("username", user);
-                  let tokenStr = "Bearer " + userData.token;
-                  console.log("Token---  " + tokenStr);
-                  sessionStorage.setItem("token", tokenStr);
-                  sessionStorage.setItem("roles", JSON.stringify(userData.roles));
-                  return userData;
-                })
-            );
-    }
-
-    logout(){
-        sessionStorage.clear()
-        this.router.navigate(['/login']);
-    }
-
-    isLoggedIn(): boolean{
-        return sessionStorage.getItem('username') !== null;
-    }
-
-    private handleError(httpError: HttpErrorResponse) {
-        let message:string = '';
-
-        if (httpError.error instanceof ProgressEvent) {
-            console.log('in progrss event')
-            message = "Network error";
-        }
-
-        else {
-            message = httpError.error.message;
-
-          console.error(
-            `Backend returned code ${httpError.status}, ` +
-            `body was: ${httpError.error}`);
-        }
-
-        return throwError(message);
-      }
-      public getUser() {
-        return JSON.parse(sessionStorage.getItem(USER_KEY));
-      }
+  public getUser() {
+    return JSON.parse(sessionStorage.getItem(USER_KEY));
+  }
 }

@@ -6,8 +6,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import com.formation.projet.entities.*;
 import com.formation.projet.repository.RoleRepository;
 import com.formation.projet.repository.UserRepository;
@@ -42,7 +40,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> userLogin(@Valid @RequestBody User user) {
-        System.out.println("AuthController -- userLogin");
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword()));
 
@@ -52,9 +49,11 @@ public class AuthController {
         List<String> roles = userBean.getAuthorities().stream()
                 .map(auth -> auth.getAuthority())
                 .collect(Collectors.toList());
+
         AuthResponse authResponse = new AuthResponse();
         authResponse.setToken(token);
         authResponse.setRoles(roles);
+
         return ResponseEntity.ok(authResponse);
     }
 
@@ -67,15 +66,13 @@ public class AuthController {
             return ResponseEntity.badRequest().body("Email is already taken");
         }
 
-
         User user = new User();
         Set<Role> roles = new HashSet<>();
         user.setUserName(signupRequest.getUserName());
         user.setEmail(signupRequest.getEmail());
         user.setPassword(encoder.encode(signupRequest.getPassword()));
-        //System.out.println("Encoded password--- " + user.getPassword());
-        String[] roleArr = signupRequest.getRoles();
 
+        String[] roleArr = signupRequest.getRoles();
         if (roleArr == null) {
             roles.add(roleRepository.findByRoleName(Roles.ROLE_USER).get());
         }
