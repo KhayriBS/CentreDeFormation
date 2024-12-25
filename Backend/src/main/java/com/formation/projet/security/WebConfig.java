@@ -13,7 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins("http://192.168.50.4:4202")  // Adresse de votre frontend Angular
                 .allowedMethods("GET", "POST", "PUT", "DELETE")  // Méthodes HTTP autorisées
-                .allowedHeaders("*")  // Autoriser tous les en-têtes
+                .allowedHeaders("Content-Type", "Authorization") // En-têtes autorisés
                 .allowCredentials(true)  // Permet l'envoi des cookies (si nécessaire)
                 .maxAge(3600);  // Durée maximale pour la pré-demande CORS en secondes
     }
