@@ -1,10 +1,6 @@
 package com.formation.projet.security;
 
-import java.util.Date;
-
 import com.formation.projet.entities.CustomUserBean;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -17,10 +13,10 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 
+import java.util.Date;
+
 @Component
 public class JwtTokenUtil {
-
-    private static final Logger logger = LoggerFactory.getLogger(JwtTokenUtil.class);
 
     @Value("${jwttoken.secret}")
     private String jwtTokenSecret;
@@ -28,7 +24,6 @@ public class JwtTokenUtil {
     @Value("${jwttoken.expiration}")
     private long jwtTokenExpiration;
 
-    // Génère un JWT token pour l'utilisateur authentifié
     public String generateJwtToken(Authentication authentication) {
         CustomUserBean userPrincipal = (CustomUserBean) authentication.getPrincipal();
         return Jwts.builder()
@@ -39,26 +34,31 @@ public class JwtTokenUtil {
                 .compact();
     }
 
-    // Valide un token JWT
     public boolean validateJwtToken(String token) {
         try {
-            // Utiliser l'ancienne méthode parser()
             Jwts.parser()
                     .setSigningKey(jwtTokenSecret)
-                    .parseClaimsJws(token);
+                    .parseClaimsJws(token);  // Utilisation de parser() au lieu de parserBuilder()
             return true;
         } catch (UnsupportedJwtException exp) {
-            logger.error("Invalid JWT token: claimsJws argument does not represent Claims JWS - {}", exp.getMessage());
+            System.out.println("Unsupported JWT: " + exp.getMessage());
         } catch (MalformedJwtException exp) {
-            logger.error("Invalid JWT token: claimsJws string is not a valid JWS - {}", exp.getMessage());
+            System.out.println("Malformed JWT: " + exp.getMessage());
         } catch (SignatureException exp) {
-            logger.error("Invalid JWT token: JWS signature validation failed - {}", exp.getMessage());
+            System.out.println("Invalid JWT signature: " + exp.getMessage());
         } catch (ExpiredJwtException exp) {
-            logger.error("Expired JWT token: Claims has an expiration time before the method is invoked - {}", exp.getMessage());
+            System.out.println("JWT expired: " + exp.getMessage());
         } catch (IllegalArgumentException exp) {
-            logger.error("Invalid JWT token: claimsJws string is null or empty - {}", exp.getMessage());
+            System.out.println("JWT string is empty or null: " + exp.getMessage());
         }
         return false;
-    }}
+    }
 
-// Récupère le nom de l'utilisateur à partir du JWT tok
+    public String getUserNameFromJwtToken(String token) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(jwtTokenSecret)
+                .parseClaimsJws(token)
+                .getBody();
+        return claims.getSubject();
+    }
+}
