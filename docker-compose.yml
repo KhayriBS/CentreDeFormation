@@ -1,7 +1,5 @@
 
-networks:
-  app-network:
-    driver: bridge
+
 
 services:
   mysql:
@@ -58,5 +56,7 @@ services:
       API_URL: backend:9095
     networks:
       - app-network
-
+networks:
+  app-network:
+    driver: bridge
 
