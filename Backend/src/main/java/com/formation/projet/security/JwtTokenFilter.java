@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
+
 @Slf4j
 public class JwtTokenFilter extends OncePerRequestFilter {
 
@@ -29,7 +30,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         try {
-            // Ignorer certains endpoints publics
+            // Ignorer certains endpoints publics comme "/auth" et "/h2-console"
             String requestURI = request.getRequestURI();
             if (requestURI.startsWith("/h2-console") || requestURI.startsWith("/auth")) {
                 filterChain.doFilter(request, response);
@@ -44,16 +45,24 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 // Charger les détails de l'utilisateur
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-                // Créer une authentification et la définir dans le contexte de sécurité
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities());
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                if (userDetails != null) {
+                    // Créer une authentification et la définir dans le contexte de sécurité
+                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                            userDetails, null, userDetails.getAuthorities());
+                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+                    // Définir l'authentification dans le contexte de sécurité
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                    logger.debug("User authenticated: {}"+ username);
+                } else {
+                    logger.warn("User not found: {}"+ username);
+                }
+            } else {
+                logger.warn("JWT Token is invalid or missing");
             }
         } catch (Exception e) {
             // Loggez l'erreur au lieu de lancer une exception
-            logger.error("Cannot set user authentication: {}", e);
+            logger.error("Error during JWT authentication: " + e.getMessage(), e);
         }
 
         // Continuer avec le filtre suivant
