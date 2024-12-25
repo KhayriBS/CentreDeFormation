@@ -10,4 +10,6 @@ export const environment = {
   apiServerUrlOrganisme: 'http://backend:9095/organisme',
   apiServerUrlPays: 'http://backend:9095/pays',
   apiServerUrlProfil: 'http://backend:9095/profil',
+  apiServerUrlParticipant: 'http://backend:9095/participant',
+
 };
