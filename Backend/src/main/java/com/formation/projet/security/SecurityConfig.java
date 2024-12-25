@@ -20,7 +20,7 @@ import org.springframework.web.cors.CorsConfiguration;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig {
+public class SecurityConfig{
     @Autowired
     private JwtAuthenticationEntryPoint authenticationEntryPoint;
 
