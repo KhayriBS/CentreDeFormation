@@ -44,6 +44,7 @@ public class AuthController {
                 new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
+
         String token = jwtTokenUtil.generateJwtToken(authentication);
         CustomUserBean userBean = (CustomUserBean) authentication.getPrincipal();
         List<String> roles = userBean.getAuthorities().stream()
