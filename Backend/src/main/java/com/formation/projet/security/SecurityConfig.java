@@ -45,13 +45,11 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
-                    config.addAllowedOrigin("http://192.168.50.4:4202");
-                    config.addAllowedMethod("GET");
-                    config.addAllowedMethod("POST");
-                    config.addAllowedMethod("PUT");
-                    config.addAllowedMethod("DELETE");
-                    config.addAllowedHeader("*");
-                    config.setAllowCredentials(true);
+                    registry.addMapping("/**")
+                            .allowedOrigins("http://192.168.50.4:4202")
+                            .allowedMethods("GET", "POST", "PUT", "DELETE")
+                            .allowedHeaders("*")
+                            .allowCredentials(true);
                     return config;
                 }))
                 .exceptionHandling(exceptionHandling ->
