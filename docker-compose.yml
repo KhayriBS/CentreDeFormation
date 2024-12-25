@@ -1,6 +1,5 @@
 
 
-
 services:
   mysql:
     image: mysql:8.0
@@ -37,6 +36,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/FORMATION?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&connectTimeout=5000&socketTimeout=5000
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
+      SPRING_PROFILES_ACTIVE: dev
       JAVA_OPTS: -Xmx512m
     depends_on:
       - mysql
