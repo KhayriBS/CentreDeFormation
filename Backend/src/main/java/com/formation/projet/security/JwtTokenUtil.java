@@ -25,14 +25,15 @@ public class JwtTokenUtil {
     private long jwtTokenExpiration;
 
     public String generateJwtToken(Authentication authentication) {
-        CustomUserBean userPrincipal = (CustomUserBean) authentication.getPrincipal();
+        UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
         return Jwts.builder()
-                .setSubject(userPrincipal.getUsername())
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + jwtTokenExpiration))
-                .signWith(SignatureAlgorithm.HS512, jwtTokenSecret)
+                .setSubject((userPrincipal.getUsername()))
+                .setIssuedAt(new Date())
+                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+                .signWith(Keys.secretKeyFor(SignatureAlgorithm.HS512)) // Utiliser la clé générée
                 .compact();
     }
+
 
     public boolean validateJwtToken(String token) {
         try {

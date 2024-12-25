@@ -40,11 +40,12 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> userLogin(@Valid @RequestBody User user) {
+        System.out.println("User received: " + user.getUserName() + " / " + user.getPassword());
+
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
         String token = jwtTokenUtil.generateJwtToken(authentication);
         CustomUserBean userBean = (CustomUserBean) authentication.getPrincipal();
         List<String> roles = userBean.getAuthorities().stream()
@@ -57,6 +58,7 @@ public class AuthController {
 
         return ResponseEntity.ok(authResponse);
     }
+
 
     @PostMapping("/signup")
     public ResponseEntity<?> userSignup(@Valid @RequestBody SignupRequest signupRequest) {
