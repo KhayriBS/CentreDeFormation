@@ -71,27 +71,8 @@
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
-			<version>0.11.0</version> <!-- ou une version antérieure stable -->
+			<version>0.9.1</version>
 		</dependency>
-
-
-
-
-
-		<!-- JAXB API -->
-		<dependency>
-			<groupId>jakarta.xml.bind</groupId>
-			<artifactId>jakarta.xml.bind-api</artifactId>
-			<version>[3.0.0,)</version> <!-- Version 3.0.0 ou plus récente -->
-		</dependency>
-
-		<!-- JAXB Runtime (reference implementation) -->
-			<dependency>
-				<groupId>org.glassfish.jaxb</groupId>
-				<artifactId>jaxb-runtime</artifactId>
-				<version>3.0.1</version> <!-- Choose appropriate version -->
-			</dependency>
-
 
 
 
