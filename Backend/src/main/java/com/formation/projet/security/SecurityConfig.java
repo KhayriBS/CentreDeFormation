@@ -53,7 +53,7 @@ public class SecurityConfig {
                 .sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Stateless sessions
                 .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/auth/**").permitAll() // Allow public access to /auth/**
+                        auth.requestMatchers("/auth/**","/actuator/prometheus").permitAll() // Allow public access to /auth/**
                                 .requestMatchers(HttpMethod.GET, "/user/allusers").permitAll() // Allow GET requests to /user/allusers
                                 .anyRequest().authenticated()); // All other requests must be authenticated
 
