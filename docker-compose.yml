@@ -20,6 +20,10 @@ services:
     container_name: mysqld_exporter
     environment:
       DATA_SOURCE_NAME: root:root@tcp(mysql:3306)/FORMATION
+    depends_on:
+      mysql:
+        condition: service_healthy
+
     networks:
       - app-network
     ports:
