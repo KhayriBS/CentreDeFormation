@@ -15,6 +15,15 @@ services:
       retries: 10
     networks:
       - app-network
+  mysqld_exporter:
+    image: prom/mysqld-exporter:latest
+    container_name: mysqld_exporter
+    environment:
+      DATA_SOURCE_NAME: root:root@tcp(mysql:3306)/FORMATION
+    networks:
+      - app-network
+    ports:
+      - "9104:9104"
 
   phpmyadmin:
     image: phpmyadmin:latest
