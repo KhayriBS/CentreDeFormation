@@ -19,16 +19,22 @@ services:
     image: prom/mysqld-exporter:latest
     container_name: mysqld_exporter
     environment:
-      DATA_SOURCE_NAME: exporter:exporter_password@tcp(mysql:3306)/
+      DATA_SOURCE_NAME: exporter:exporter_password@tcp(mysql:3306)/  # Assurez-vous que cet utilisateur existe dans MySQL
     volumes:
-      - ./.my.cnf:/etc/mysql/my.cnf
+      - ./.my.cnf:/etc/.my.cnf  # Montez le fichier .my.cnf dans /etc/.my.cnf
     depends_on:
       mysql:
         condition: service_healthy
     networks:
       - app-network
     ports:
-      - "9104:9104"
+      - "9104:9104"  # Exposez le port pour accéder aux métriques
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "mysql" ]  # Vérifie si MySQL répond correctement
+      interval: 30s
+      retries: 3
+      start_period: 10s
+      timeout: 10s
 
 
   phpmyadmin:
