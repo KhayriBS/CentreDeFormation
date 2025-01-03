@@ -19,11 +19,11 @@ services:
     image: prom/mysqld-exporter
     command:
       - --config.my-cnf=/cfg/.my.cnf
-      - --mysqld.address=192.168.50.4:3306
+      - --mysqld.address=mysql:3306
     volumes:
       - "./.my.cnf:/cfg/.my.cnf"
     environment:
-      DATA_SOURCE_NAME: exporter:exporter@tcp(192.168.50.4:3306)/
+      DATA_SOURCE_NAME: exporter:exporter@tcp(mysql:3306)/
     ports:
       - "9104:9104"
     depends_on:
