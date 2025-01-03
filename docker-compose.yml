@@ -15,11 +15,13 @@ services:
       retries: 10
     networks:
       - app-network
+    volumes:
+      - mysql-data:/var/lib/mysql
   mysqld_exporter:
     image: prom/mysqld-exporter
     command:
       - --config.my-cnf=/cfg/.my.cnf
-      - --mysqld.address=mysql:3306
+      - --mysqld.address=host=127.0.0.1:3306
     volumes:
       - "./.my.cnf:/cfg/.my.cnf:ro"
     ports:
@@ -76,6 +78,8 @@ services:
         condition: service_started
     networks:
       - app-network
+volumes:
+  mysql-data:
 networks:
   app-network:
     driver: bridge
