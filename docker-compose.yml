@@ -19,7 +19,7 @@ services:
     image: prom/mysqld-exporter:latest
     container_name: mysqld_exporter
     environment:
-      DATA_SOURCE_NAME: exporter:exporter_password@tcp(mysql:3306)/  # Assurez-vous que cet utilisateur existe dans MySQL
+      DATA_SOURCE_NAME: root:root@tcp(mysql:3306)/  # Assurez-vous que cet utilisateur existe dans MySQL
     volumes:
       - ./.my.cnf:/etc/.my.cnf  # Montez le fichier .my.cnf dans /etc/.my.cnf
     depends_on:
