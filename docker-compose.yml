@@ -17,12 +17,13 @@ services:
       - app-network
   mysqld_exporter:
     image: prom/mysqld-exporter
+    command:
+      - --config.my-cnf=/cfg/.my.cnf
+      - --mysqld.address=192.168.50.4:3306
+    volumes:
+      - "./.my.cnf:/cfg/.my.cnf"
     ports:
       - "9104:9104"
-    environment:
-      DATA_SOURCE_NAME: root:root@tcp(mysql:3306)/    # Connexion à MySQL avec l'utilisateur root
-    depends_on:
-      - mysql
     networks:
       - app-network
   phpmyadmin:
