@@ -23,7 +23,7 @@ services:
     volumes:
       - ./my.cnf:/etc/mysql/my.cnf
     depends_on:
-      mysql:
+      test-mysql-1:
         condition: service_healthy
     networks:
       - app-network
