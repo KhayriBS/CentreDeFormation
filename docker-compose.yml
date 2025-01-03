@@ -16,27 +16,15 @@ services:
     networks:
       - app-network
   mysqld_exporter:
-    image: prom/mysqld-exporter:latest
-    container_name: mysqld_exporter
+    image: prom/mysqld-exporter
+    ports:
+      - "9104:9104"
     environment:
-      DATA_SOURCE_NAME: root:root@tcp(mysql:3306)/  # Assurez-vous que cet utilisateur existe dans MySQL
-    volumes:
-      - ./.my.cnf:/etc/.my.cnf  # Montez le fichier .my.cnf dans /etc/.my.cnf
+      DATA_SOURCE_NAME: root:root@tcp(mysql:3306)/    # Connexion à MySQL avec l'utilisateur root
     depends_on:
-      mysql:
-        condition: service_healthy
+      - mysql
     networks:
       - app-network
-    ports:
-      - "9104:9104"  # Exposez le port pour accéder aux métriques
-    healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "mysql" ]  # Vérifie si MySQL répond correctement
-      interval: 30s
-      retries: 3
-      start_period: 10s
-      timeout: 10s
-
-
   phpmyadmin:
     image: phpmyadmin:latest
     restart: always
