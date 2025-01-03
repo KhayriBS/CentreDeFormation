@@ -21,7 +21,7 @@ services:
     environment:
       DATA_SOURCE_NAME: exporter:exporter_password@tcp(test-mysql-1:3306)/
     volumes:
-      - ./my.cnf:/root/.my.cnf
+      - ./my.cnf:/etc/mysql/my.cnf
     depends_on:
       mysql:
         condition: service_healthy
