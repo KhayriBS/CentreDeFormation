@@ -19,7 +19,7 @@ services:
     image: prom/mysqld-exporter:latest
     container_name: mysqld_exporter
     environment:
-      DATA_SOURCE_NAME: exporter:exporter_password@tcp(test-mysql-1:3306)/
+      DATA_SOURCE_NAME: exporter:exporter_password@tcp(mysql:3306)/
     volumes:
       - ./.my.cnf:/etc/mysql/my.cnf
     depends_on:
