@@ -19,11 +19,14 @@ services:
     image: prom/mysqld-exporter
     command:
       - --config.my-cnf=/cfg/.my.cnf
-      - --mysqld.address=192.168.50.4:3306
+      - --mysqld.address=mysql:3306
     volumes:
-      - "./.my.cnf:/cfg/.my.cnf"
+      - "./.my.cnf:/cfg/.my.cnf:ro"
     ports:
       - "9104:9104"
+    depends_on:
+      mysql:
+        condition: service_healthy
     networks:
       - app-network
   phpmyadmin:
