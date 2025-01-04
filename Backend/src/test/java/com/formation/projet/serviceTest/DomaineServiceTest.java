@@ -14,8 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class DomaineServiceTest {
@@ -33,8 +32,8 @@ public class DomaineServiceTest {
     @Test
     void testFindAll() {
         // Arrange
-        Domaine domaine1 = new Domaine(1L, "Technology");
-        Domaine domaine2 = new Domaine(2L, "Education");
+        Domaine domaine1 = new Domaine(1L, "Technologie");
+        Domaine domaine2 = new Domaine(2L, "Éducation");
         when(domaineRepository.findAll()).thenReturn(Arrays.asList(domaine1, domaine2));
 
         // Act
@@ -42,14 +41,14 @@ public class DomaineServiceTest {
 
         // Assert
         assertEquals(2, result.size());
-        assertEquals("Technology", result.get(0).getLibelle());
+        assertEquals("Technologie", result.get(0).getLibelle());
         verify(domaineRepository, times(1)).findAll();
     }
 
     @Test
     void testFindById() {
         // Arrange
-        Domaine domaine = new Domaine(1L, "Technology");
+        Domaine domaine = new Domaine(1L, "Technologie");
         when(domaineRepository.findById(1L)).thenReturn(Optional.of(domaine));
 
         // Act
@@ -57,14 +56,24 @@ public class DomaineServiceTest {
 
         // Assert
         assertNotNull(result);
-        assertEquals("Technology", result.getLibelle());
+        assertEquals("Technologie", result.getLibelle());
         verify(domaineRepository, times(1)).findById(1L);
+    }
+
+    @Test
+    void testFindById_NotFound() {
+        // Arrange
+        when(domaineRepository.findById(1L)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        Exception exception = assertThrows(RuntimeException.class, () -> domaineService.findById(1L));
+        assertEquals("Domaine non trouvé", exception.getMessage());
     }
 
     @Test
     void testSave() {
         // Arrange
-        Domaine domaine = new Domaine(0, "Health");
+        Domaine domaine = new Domaine(0L, "Santé");
         when(domaineRepository.save(domaine)).thenReturn(domaine);
 
         // Act
@@ -72,14 +81,24 @@ public class DomaineServiceTest {
 
         // Assert
         assertNotNull(response);
-        assertEquals("Domaine saved successfully!", response.getMessage());
+        assertEquals("Succès", response.getMessage());
         verify(domaineRepository, times(1)).save(domaine);
+    }
+
+    @Test
+    void testSave_InvalidDomaine() {
+        // Arrange
+        Domaine domaine = new Domaine(0L, ""); // Libelle vide
+
+        // Act & Assert
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> domaineService.save(domaine));
+        assertEquals("Le libellé ne peut pas être vide", exception.getMessage());
     }
 
     @Test
     void testUpdate() {
         // Arrange
-        Domaine domaine = new Domaine(1L, "Health");
+        Domaine domaine = new Domaine(1L, "Finance");
         when(domaineRepository.findById(1L)).thenReturn(Optional.of(domaine));
         when(domaineRepository.save(domaine)).thenReturn(domaine);
 
@@ -88,9 +107,20 @@ public class DomaineServiceTest {
 
         // Assert
         assertNotNull(response);
-        assertEquals("Domaine updated successfully!", response.getMessage());
+        assertEquals("Succès", response.getMessage());
         verify(domaineRepository, times(1)).findById(1L);
         verify(domaineRepository, times(1)).save(domaine);
+    }
+
+    @Test
+    void testUpdate_NotFound() {
+        // Arrange
+        Domaine domaine = new Domaine(1L, "Finance");
+        when(domaineRepository.findById(1L)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        Exception exception = assertThrows(RuntimeException.class, () -> domaineService.update(1, domaine));
+        assertEquals("Domaine non trouvé", exception.getMessage());
     }
 
     @Test
@@ -104,8 +134,18 @@ public class DomaineServiceTest {
 
         // Assert
         assertNotNull(response);
-        assertEquals("Domaine deleted successfully!", response.getMessage());
+        assertEquals("Succès", response.getMessage());
         verify(domaineRepository, times(1)).findById(1L);
         verify(domaineRepository, times(1)).deleteById(1L);
+    }
+
+    @Test
+    void testDelete_NotFound() {
+        // Arrange
+        when(domaineRepository.findById(1L)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        Exception exception = assertThrows(RuntimeException.class, () -> domaineService.delete(1));
+        assertEquals("Domaine non trouvé", exception.getMessage());
     }
 }
