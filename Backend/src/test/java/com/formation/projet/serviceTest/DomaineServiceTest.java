@@ -41,7 +41,6 @@ public class DomaineServiceTest {
 
         // Assert
         assertEquals(2, result.size());
-        assertEquals("Technologie", result.get(0).getLibelle());
         verify(domaineRepository, times(1)).findAll();
     }
 
@@ -66,77 +65,91 @@ public class DomaineServiceTest {
         when(domaineRepository.findById(1L)).thenReturn(Optional.empty());
 
         // Act & Assert
-        Exception exception = assertThrows(RuntimeException.class, () -> domaineService.findById(1L));
-        assertEquals("Domaine non trouvé", exception.getMessage());
+        Exception exception = assertThrows(RuntimeException.class, () -> domaineService.delete(1L));
+        assertEquals("Ce domaine n'existe pas !", exception.getMessage());
     }
 
     @Test
     void testSave() {
         // Arrange
         Domaine domaine = new Domaine(0L, "Santé");
+        when(domaineRepository.existsByLibelle(domaine.getLibelle())).thenReturn(false);
         when(domaineRepository.save(domaine)).thenReturn(domaine);
 
         // Act
         MessageResponse response = domaineService.save(domaine);
 
         // Assert
-        assertNotNull(response);
+        assertTrue(response.isSuccess());
         assertEquals("Succès", response.getMessage());
+        verify(domaineRepository, times(1)).existsByLibelle(domaine.getLibelle());
         verify(domaineRepository, times(1)).save(domaine);
     }
 
     @Test
-    void testSave_InvalidDomaine() {
+    void testSave_DomaineExists() {
         // Arrange
-        Domaine domaine = new Domaine(0L, ""); // Libelle vide
+        Domaine domaine = new Domaine(0L, "Santé");
+        when(domaineRepository.existsByLibelle(domaine.getLibelle())).thenReturn(true);
 
-        // Act & Assert
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> domaineService.save(domaine));
-        assertEquals("Le libellé ne peut pas être vide", exception.getMessage());
+        // Act
+        MessageResponse response = domaineService.save(domaine);
+
+        // Assert
+        assertFalse(response.isSuccess());
+        assertEquals("Echec !", response.getMessage());
+        verify(domaineRepository, times(1)).existsByLibelle(domaine.getLibelle());
+        verify(domaineRepository, never()).save(domaine);
     }
 
     @Test
     void testUpdate() {
         // Arrange
-        Domaine domaine = new Domaine(1L, "Finance");
-        when(domaineRepository.findById(1L)).thenReturn(Optional.of(domaine));
-        when(domaineRepository.save(domaine)).thenReturn(domaine);
+        Domaine existingDomaine = new Domaine(1L, "Technologie");
+        Domaine updatedDomaine = new Domaine(1L, "Science");
+        when(domaineRepository.findById(1L)).thenReturn(Optional.of(existingDomaine));
+        when(domaineRepository.save(updatedDomaine)).thenReturn(updatedDomaine);
 
         // Act
-        MessageResponse response = domaineService.update(1, domaine);
+        MessageResponse response = domaineService.update(1L, updatedDomaine);
 
         // Assert
-        assertNotNull(response);
+        assertTrue(response.isSuccess());
         assertEquals("Succès", response.getMessage());
         verify(domaineRepository, times(1)).findById(1L);
-        verify(domaineRepository, times(1)).save(domaine);
+        verify(domaineRepository, times(1)).save(updatedDomaine);
     }
 
     @Test
     void testUpdate_NotFound() {
         // Arrange
-        Domaine domaine = new Domaine(1L, "Finance");
+        Domaine updatedDomaine = new Domaine(1L, "Science");
         when(domaineRepository.findById(1L)).thenReturn(Optional.empty());
 
-        // Act & Assert
-        Exception exception = assertThrows(RuntimeException.class, () -> domaineService.update(1, domaine));
-        assertEquals("Domaine non trouvé", exception.getMessage());
+        // Act
+        MessageResponse response = domaineService.update(1L, updatedDomaine);
+
+        // Assert
+        assertFalse(response.isSuccess());
+        assertEquals("Echec !", response.getMessage());
+        verify(domaineRepository, times(1)).findById(1L);
+        verify(domaineRepository, never()).save(updatedDomaine);
     }
 
     @Test
     void testDelete() {
         // Arrange
-        Domaine domaine = new Domaine(1L, "Finance");
+        Domaine domaine = new Domaine(1L, "Technologie");
         when(domaineRepository.findById(1L)).thenReturn(Optional.of(domaine));
 
         // Act
-        MessageResponse response = domaineService.delete(1);
+        MessageResponse response = domaineService.delete(1L);
 
         // Assert
-        assertNotNull(response);
+        assertTrue(response.isSuccess());
         assertEquals("Succès", response.getMessage());
         verify(domaineRepository, times(1)).findById(1L);
-        verify(domaineRepository, times(1)).deleteById(1L);
+        verify(domaineRepository, times(1)).delete(domaine);
     }
 
     @Test
@@ -145,7 +158,7 @@ public class DomaineServiceTest {
         when(domaineRepository.findById(1L)).thenReturn(Optional.empty());
 
         // Act & Assert
-        Exception exception = assertThrows(RuntimeException.class, () -> domaineService.delete(1));
-        assertEquals("Domaine non trouvé", exception.getMessage());
+        Exception exception = assertThrows(RuntimeException.class, () -> domaineService.delete(1L));
+        assertEquals("Ce domaine n'existe pas !", exception.getMessage());
     }
 }

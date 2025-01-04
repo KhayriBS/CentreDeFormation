@@ -50,17 +50,16 @@ public class DomaineServiceImpl implements DomaineService {
 
     @Transactional
     @Override
-	public MessageResponse delete(long id)  {
-    	Domaine domaine = findById(id);
-		if (domaine == null){
-        	return new MessageResponse(false,"Echec !","Ce domaine n'existe pas !");   
-        } else {
+    public MessageResponse delete(long id) {
+        Domaine domaine = domaineRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Ce domaine n'existe pas !"));
+
         domaineRepository.delete(domaine);
-        return new MessageResponse(true,"Succès","Opération réalisée avec succès.");
-        }
+        return new MessageResponse(true, "Succès", "Opération réalisée avec succès.");
     }
-    
-    
+
+
+
     @Override
     public List<Domaine> findAll() {
 
