@@ -18,9 +18,9 @@ import io.jsonwebtoken.UnsupportedJwtException;
 @Component
 public class JwtTokenUtil {
     @Value("${jwttoken.secret}")
-    private String jwtTokenSecret;
+    String jwtTokenSecret;
     @Value("${jwttoken.expiration}")
-    private long jwtTokenExpiration;
+    long jwtTokenExpiration;
 
     public String generateJwtToken(Authentication authentication) {
         CustomUserBean userPrincipal = (CustomUserBean)authentication.getPrincipal();

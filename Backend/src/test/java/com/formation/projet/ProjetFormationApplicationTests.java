@@ -14,5 +14,4 @@ import org.springframework.test.context.ActiveProfiles;
 @SpringBootTest
 public class ProjetFormationApplicationTests {
 
-
 }
