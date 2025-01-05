@@ -1,5 +1,4 @@
 package com.formation.projet.serviceTest;
-
 import com.formation.projet.entities.Domaine;
 import com.formation.projet.repository.DomaineRepository;
 import com.formation.projet.response.MessageResponse;
@@ -9,14 +8,18 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
+@SpringBootTest
+@Transactional
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 public class MockitoDomaineServiceTest {
     @InjectMocks
     private DomaineServiceImpl domaineService;

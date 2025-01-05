@@ -10,6 +10,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,15 +22,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
+@SpringBootTest
+@Transactional
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 
-public class FormateurServiceTest {
+public class MockitoFormateurServiceTest {
     @InjectMocks
     private FormateurServiceImpl formateurService; // Implémentation réelle du service
 
     @Mock
     private FormateurRepository formateurRepository; // Hypothèse que vous utilisez un repository
 
-    public FormateurServiceTest() {
+    public MockitoFormateurServiceTest() {
         MockitoAnnotations.openMocks(this); // Initialise les mocks
     }
 

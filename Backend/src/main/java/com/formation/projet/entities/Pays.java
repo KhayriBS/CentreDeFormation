@@ -3,10 +3,11 @@ package com.formation.projet.entities;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 
 import java.io.Serializable;
-
-
 
 @Entity
 public class Pays implements Serializable {
@@ -17,6 +18,7 @@ public class Pays implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="Pays_id")
 	private long id;
+	@Column(name = "libelle", nullable = false, unique = true)
 	private String libelle;
 	
 	public Pays(long id, String libelle) {

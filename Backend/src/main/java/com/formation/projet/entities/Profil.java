@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 
-
 @Entity
 public class Profil implements Serializable {
 
@@ -14,6 +13,8 @@ private static final long serialVersionUID = 1L;
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="profilId")
 	private long id;
+	@Column(name = "libelle", nullable = false, unique = true)
+
 	private String libelle;
 	
 	public Profil(long id, String libelle) {
