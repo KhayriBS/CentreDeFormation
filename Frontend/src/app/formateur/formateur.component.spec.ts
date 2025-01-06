@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormateurComponent } from './formateur.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 describe('FormateurComponent', () => {
   let component: FormateurComponent;
@@ -8,7 +10,9 @@ describe('FormateurComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FormateurComponent ]
+      declarations: [ FormateurComponent ],
+      imports:[HttpClientModule,FormsModule]
+      
     })
     .compileComponents();
   });

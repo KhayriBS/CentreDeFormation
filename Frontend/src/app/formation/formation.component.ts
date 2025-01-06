@@ -28,8 +28,8 @@ export class FormationComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private domaineService: DomaineService, private formationService: FormationService) { }
 
   ngOnInit(): void {
-    this.user = sessionStorage.getItem("roles");
-    this.userName = sessionStorage.getItem("username");
+    this.user = sessionStorage.getItem("roles")||'';
+    this.userName = sessionStorage.getItem("username")||'';
 
    this.showAdminBoard = this.user.includes('ROLE_ADMIN');
     this.showUserBoard = this.user.includes('ROLE_USER');

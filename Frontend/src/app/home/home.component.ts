@@ -11,8 +11,8 @@ export class HomeComponent implements OnInit {
   userRoles: string;
   constructor() { }
   ngOnInit() {
-    this.userName = sessionStorage.getItem("username");
-    this.userRoles = sessionStorage.getItem("roles");
+    this.userName = sessionStorage.getItem("username")||'';
+    this.userRoles = sessionStorage.getItem("roles")||'';
   }
 
 }

@@ -28,10 +28,10 @@ export class FormationDetailsComponent implements OnInit {
     private formationService: FormationService,  private sessionService : SessionService) { }
 
   ngOnInit(): void {
-    this.formationId = this.route.snapshot.params['formationId'];
+    this.formationId = this.route.snapshot?.params?.['formationId']||'';
 this.geSessions();
-this.user = sessionStorage.getItem("roles");
-this.userName = sessionStorage.getItem("username");
+this.user = sessionStorage.getItem("roles")||'';
+this.userName = sessionStorage.getItem("username")||'';
 
 this.showAdminBoard = this.user.includes('ROLE_ADMIN');
 this.showUserBoard = this.user.includes('ROLE_USER');

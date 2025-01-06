@@ -56,6 +56,7 @@ import { RouterModule } from '@angular/router';
     BrowserAnimationsModule,
     TableModule, 
     FormsModule,
+    
     HttpClientModule,
     AppRoutingModule,
     ToastNoAnimationModule,

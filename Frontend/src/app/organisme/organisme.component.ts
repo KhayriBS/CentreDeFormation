@@ -24,8 +24,8 @@ export class OrganismeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getOrganismes();
-    this.user = sessionStorage.getItem("roles");
-    this.userName = sessionStorage.getItem("username");
+    this.user = sessionStorage.getItem("roles")||'';
+    this.userName = sessionStorage.getItem("username")||'';
 
    this.showAdminBoard = this.user.includes('ROLE_ADMIN');
     this.showUserBoard = this.user.includes('ROLE_USER');
